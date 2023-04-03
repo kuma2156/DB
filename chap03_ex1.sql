@@ -36,22 +36,3 @@ FROM Book;
 SELECT COUNT(Book.publisher) AS "박지성이 구매한 도서의 출판사 수"
 FROM Book, Customer, Orders
 WHERE Book.bookid = Orders.bookid AND Customer.custid = Orders.custid AND Customer.name LIKE '박지성';
-
--- Customer 테이블에서 고객명과 주소를 조회합니다.
-SELECT name, address
-FROM Customer ;
-
--- Orders 테이블에서 2020년 7월 4일부터 7월 7일 사이에 발생한 주문번호를 조회합니다.
-SELECT orderid
-FROM Orders
-WHERE orderdate BETWEEN '2020-07-04' AND '2020-07-07';
-
--- Orders 테이블에서 2020년 7월 4일부터 7월 7일 사이에 발생하지 않은 주문번호를 조회합니다.
-SELECT orderid
-FROM Orders
-WHERE orderdate NOT BETWEEN  '2020-07-04' AND '2020-07-07';
-
--- Customer 테이블에서 이름이 '김'으로 시작하고 뒤에 한 글자가 있고, 뒤에 '아'가 붙은 고객의 이름과 주소를 조회합니다.
-SELECT name, address
-FROM Customer
-WHERE name LIKE '김%_아';
