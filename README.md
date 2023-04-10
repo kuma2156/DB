@@ -10,4 +10,4 @@ Database <br>
 부속질의 , HAVING 절, 집합연산을 이용 <br>
 <br><br>
 23 04 10 <br>
-195p 풀이<br>
+195p 풀이 및 내가 했던 거 비교<br>
