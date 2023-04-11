@@ -1,32 +1,32 @@
--- ¹ÚÁö¼ºÀÌ ±¸¸ÅÇÑ µµ¼­ÀÇ ÃâÆÇ»ç ¼ö 1.5
-SELECT COUNT(DISTINCT publisher) AS "¹ÚÁö¼ºÀÌ ±¸¸ÅÇÑ µµ¼­ÀÇ ÃâÆÇ»ç ¼ö"
+-- ë°•ì§€ì„±ì´ êµ¬ë§¤í•œ ë„ì„œì˜ ì¶œíŒì‚¬ ìˆ˜ 1.5
+SELECT COUNT(DISTINCT publisher) AS "ë°•ì§€ì„±ì´ êµ¬ë§¤í•œ ë„ì„œì˜ ì¶œíŒì‚¬ ìˆ˜"
 FROM Book
 WHERE bookid IN (SELECT bookid
                  FROM Orders
                  WHERE custid = (SELECT custid 
                                  FROM Customer 
-                                 WHERE name = '¹ÚÁö¼º'));
+                                 WHERE name = 'ë°•ì§€ì„±'));
                                  
 select count(distinct publisher)
 from customer,orders,book
-where customer.custid = orders.custid and orders.bookid = book.bookid and customer.name like '¹ÚÁö¼º';
-/*from¿¡ customer, orders, book Å×ÀÌºíÀ» Àû¾îÁÖ°í where Àı¿¡ Å×ÀÌºíµéÀ» Á¶ÀÎ½ÃÄÑÁØ´Ù.*/
+where customer.custid = orders.custid and orders.bookid = book.bookid and customer.name like 'ë°•ì§€ì„±';
+/*fromì— customer, orders, book í…Œì´ë¸”ì„ ì ì–´ì£¼ê³  where ì ˆì— í…Œì´ë¸”ë“¤ì„ ì¡°ì¸ì‹œì¼œì¤€ë‹¤.*/
 --------------------------------------------------------------------------------------------------------------
--- ¹ÚÁö¼ºÀÌ ±¸¸ÅÇÑ µµ¼­ÀÇ ÀÌ¸§, °¡°İ, Á¤°¡¿Í ÆÇ¸Å°¡°İÀÇ Â÷ÀÌ 1.6
-SELECT Book.bookname, Book.price, (Book.price - Orders.saleprice) AS "Á¤°¡¿Í ÆÇ¸Å°¡°İÀÇ Â÷ÀÌ"
+-- ë°•ì§€ì„±ì´ êµ¬ë§¤í•œ ë„ì„œì˜ ì´ë¦„, ê°€ê²©, ì •ê°€ì™€ íŒë§¤ê°€ê²©ì˜ ì°¨ì´ 1.6
+SELECT Book.bookname, Book.price, (Book.price - Orders.saleprice) AS "ì •ê°€ì™€ íŒë§¤ê°€ê²©ì˜ ì°¨ì´"
 FROM Book
 JOIN Orders ON Book.bookid = Orders.bookid
 JOIN Customer ON Orders.custid = Customer.custid
-WHERE Customer.name = '¹ÚÁö¼º';
+WHERE Customer.name = 'ë°•ì§€ì„±';
 
 select book.bookname , book.price, (book.price - orders.saleprice)
 from book, orders , customer
-where customer.custid = orders.custid and orders.bookid = book.bookid and customer.name like '¹ÚÁö¼º';
+where customer.custid = orders.custid and orders.bookid = book.bookid and customer.name like 'ë°•ì§€ì„±';
 ---------------------------------------------------------------------------------------------------------------
--- ¹ÚÁö¼ºÀÌ ±¸¸ÅÇÏÁö ¾ÊÀº µµ¼­ÀÇ ÀÌ¸§ 1.7
-SELECT Book.bookname AS "¹ÚÁö¼ºÀÌ ±¸¸ÅÇÏÁö ¾ÊÀº Ã¥ ÀÌ¸§"
+-- ë°•ì§€ì„±ì´ êµ¬ë§¤í•˜ì§€ ì•Šì€ ë„ì„œì˜ ì´ë¦„ 1.7
+SELECT Book.bookname AS "ë°•ì§€ì„±ì´ êµ¬ë§¤í•˜ì§€ ì•Šì€ ì±… ì´ë¦„"
 FROM Book
-WHERE bookid NOT IN (SELECT DISTINCT bookid FROM Orders WHERE custid = (SELECT custid FROM Customer WHERE name = '¹ÚÁö¼º'));
+WHERE bookid NOT IN (SELECT DISTINCT bookid FROM Orders WHERE custid = (SELECT custid FROM Customer WHERE name = 'ë°•ì§€ì„±'));
 
 select bookname
 from book
@@ -35,10 +35,10 @@ where not exists (
                   from customer, orders
                   where customer.custid = orders.custid and 
                         orders.bookid = book.bookid and 
-                        customer.name like '¹ÚÁö¼º');
+                        customer.name like 'ë°•ì§€ì„±');
                   
 ---------------------------------------------------------------------------------------------------------------
--- ÁÖ¹®ÇÏÁö ¾ÊÀº °í°´ÀÇ ÀÌ¸§(ºÎ¼ÓÀı) 2.8
+-- ì£¼ë¬¸í•˜ì§€ ì•Šì€ ê³ ê°ì˜ ì´ë¦„(ë¶€ì†ì ˆ) 2.8
 SELECT name
 FROM Customer
 WHERE custid NOT IN (SELECT DISTINCT custid FROM Orders);
@@ -51,15 +51,15 @@ where custid not in (select distinct custid
 select distinct custid
 from orders;
 ---------------------------------------------------------------------------------------------------------------
--- ÁÖ¹® ±İ¾×ÀÇ ÃÑ¾×°ú ÁÖ¹®ÀÇ Æò±Õ ±İ¾× 2.9
-SELECT SUM(saleprice) AS "ÁÖ¹® ±İ¾×ÀÇ ÃÑ¾×", AVG(saleprice) AS "ÁÖ¹®ÀÇ Æò±Õ ±İ¾×"
+-- ì£¼ë¬¸ ê¸ˆì•¡ì˜ ì´ì•¡ê³¼ ì£¼ë¬¸ì˜ í‰ê·  ê¸ˆì•¡ 2.9
+SELECT SUM(saleprice) AS "ì£¼ë¬¸ ê¸ˆì•¡ì˜ ì´ì•¡", AVG(saleprice) AS "ì£¼ë¬¸ì˜ í‰ê·  ê¸ˆì•¡"
 FROM Orders;
 
 select sum(saleprice), avg(saleprice)
 from orders;
 ---------------------------------------------------------------------------------------------------------------
--- °í°´ÀÇ ÀÌ¸§°ú °í°´º° ±¸¸Å¾× 2.10
-SELECT customer.name AS "°í°´ÀÇ ÀÌ¸§", SUM(orders.saleprice) AS "°í°´ º° ±¸¸Å¾×"
+-- ê³ ê°ì˜ ì´ë¦„ê³¼ ê³ ê°ë³„ êµ¬ë§¤ì•¡ 2.10
+SELECT customer.name AS "ê³ ê°ì˜ ì´ë¦„", SUM(orders.saleprice) AS "ê³ ê° ë³„ êµ¬ë§¤ì•¡"
 FROM Customer
 JOIN Orders ON Customer.custid = Orders.custid
 GROUP BY Customer.name;
@@ -69,19 +69,19 @@ from customer, orders
 where customer.custid = orders.custid
 group by name;
 ---------------------------------------------------------------------------------------------------------------
--- °í°´ÀÇ ÀÌ¸§°ú °í°´ÀÌ ±¸¸ÅÇÑ µµ¼­ ¸ñ·Ï 2.11
+-- ê³ ê°ì˜ ì´ë¦„ê³¼ ê³ ê°ì´ êµ¬ë§¤í•œ ë„ì„œ ëª©ë¡ 2.11
 SELECT customer.name, book.bookname
 FROM Orders
 JOIN Customer ON Orders.custid = Customer.custid
 JOIN Book ON Orders.bookid = Book.bookid
 GROUP BY customer.name, book.bookname;
 
-select name as "°í°´ ÀÌ¸§", bookname as "±¸¸ÅÇÑ µµ¼­ÀÌ¸§"
+select name as "ê³ ê° ì´ë¦„", bookname as "êµ¬ë§¤í•œ ë„ì„œì´ë¦„"
 from customer, book , orders
 where customer.custid = orders.custid and orders.bookid = book.bookid
 group by name, bookname;
 ---------------------------------------------------------------------------------------------------------------
--- µµ¼­ÀÇ °¡°İ(Book Å×ÀÌºí)°ú ÆÇ¸Å°¡°İ(Orders Å×ÀÌºí)ÀÇ Â÷ÀÌ°¡ °¡Àå ¸¹Àº ÁÖ¹® 2.12
+-- ë„ì„œì˜ ê°€ê²©(Book í…Œì´ë¸”)ê³¼ íŒë§¤ê°€ê²©(Orders í…Œì´ë¸”)ì˜ ì°¨ì´ê°€ ê°€ì¥ ë§ì€ ì£¼ë¬¸ 2.12
 SELECT *
 FROM book, ORDERS
 WHERE book.BOOKID = orders.BOOKID AND book.PRICE-orders.SALEPRICE = (SELECT max(book.PRICE-orders.SALEPRICE) FROM book, ORDERS WHERE book.BOOKID = orders.BOOKID);
@@ -92,7 +92,7 @@ where orders.bookid = book.bookid and book.price - orders.saleprice = (select ma
                                                                        from book, orders
                                                                        where orders.bookid = book.bookid);
 ---------------------------------------------------------------------------------------------------------------
--- µµ¼­ÀÇ ÆÇ¸Å¾× Æò±Õº¸´Ù ÀÚ½ÅÀÇ ±¸¸Å¾× Æò±ÕÀÌ ´õ ³ôÀº °í°´ÀÇ ÀÌ¸§ 2.13
+-- ë„ì„œì˜ íŒë§¤ì•¡ í‰ê· ë³´ë‹¤ ìì‹ ì˜ êµ¬ë§¤ì•¡ í‰ê· ì´ ë” ë†’ì€ ê³ ê°ì˜ ì´ë¦„ 2.13
 SELECT Customer.name
 FROM Customer
 JOIN Orders ON Customer.custid = Orders.custid
