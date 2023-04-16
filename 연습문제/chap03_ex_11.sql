@@ -1,17 +1,17 @@
 
--- ±ØÀå
+-- ê·¹ì¥
 CREATE TABLE theater_01 (
   theater_id INT PRIMARY KEY,
   theater_name VARCHAR(50),
   location VARCHAR(100)
 );
-insert into theater_01 values(1,'·Ôµ¥','Àá½Ç');
-insert into theater_01 values(2,'¸Ş°¡','°­³²');
-insert into theater_01 values(3,'´ëÇÑ','Àá½Ç');
+insert into theater_01 values(1,'ë¡¯ë°','ì ì‹¤');
+insert into theater_01 values(2,'ë©”ê°€','ê°•ë‚¨');
+insert into theater_01 values(3,'ëŒ€í•œ','ì ì‹¤');
 
 select * from theater_01;
 
--- »ó¿µ°ü
+-- ìƒì˜ê´€
 CREATE TABLE screening_room_01 (
   theater_id INT,
   room_number INT,
@@ -23,13 +23,13 @@ CREATE TABLE screening_room_01 (
 );
 alter table screening_room_01 modify room_number number check(0<room_number and room_number<11);
 
-insert into screening_room_01 values(1,1,'¾î·Á¿î ¿µÈ­',15000,48);
-insert into screening_room_01 values(3,1,'¸ÚÁø ¿µÈ­',7500,120);
-insert into screening_room_01 values(3,2,'Àç¹Õ´Â ¿µÈ­',8000,110);
+insert into screening_room_01 values(1,1,'ì–´ë ¤ìš´ ì˜í™”',15000,48);
+insert into screening_room_01 values(3,1,'ë©‹ì§„ ì˜í™”',7500,120);
+insert into screening_room_01 values(3,2,'ì¬ë°ŒëŠ” ì˜í™”',8000,110);
 
 select * from screening_room_01;
 
--- ¿¹¾à
+-- ì˜ˆì•½
 CREATE TABLE reservation_01 (
   theater_id number,
   room_number number,
@@ -47,105 +47,105 @@ insert into reservation_01 values(1,1,9,48,'2020-09-01');
 
 select * from reservation_01;
 
--- °í°´
+-- ê³ ê°
 CREATE TABLE customer_01 (
   customer_id INT PRIMARY KEY,
   name VARCHAR(50),
   address VARCHAR(100)
 );
 
-insert into customer_01 values(3,'È«±æµ¿','°­³²');
-insert into customer_01 values(4,'±èÃ¶¼ö','Àá½Ç');
-insert into customer_01 values(9,'¹Ú¿µÈñ','°­³²');
+insert into customer_01 values(3,'í™ê¸¸ë™','ê°•ë‚¨');
+insert into customer_01 values(4,'ê¹€ì² ìˆ˜','ì ì‹¤');
+insert into customer_01 values(9,'ë°•ì˜í¬','ê°•ë‚¨');
 
 select * from customer_01;
 
 --------------------------------------------------------------------------------------
 
---(1) ´Ü¼ø ÁúÀÇ
-    -- 1 ¸ğµç ±ØÀåÀÇ ÀÌ¸§°ú À§Ä¡¸¦ º¸ÀÌ½Ã¿À
+--(1) ë‹¨ìˆœ ì§ˆì˜
+    -- 1 ëª¨ë“  ê·¹ì¥ì˜ ì´ë¦„ê³¼ ìœ„ì¹˜ë¥¼ ë³´ì´ì‹œì˜¤
     select theater_name,location
     from theater_01;
-    -- 2 Àá½Ç¿¡ ÀÖ´Â ±ØÀåÀ» º¸ÀÌ½Ã¿À
+    -- 2 ì ì‹¤ì— ìˆëŠ” ê·¹ì¥ì„ ë³´ì´ì‹œì˜¤
     select *
     from theater_01
-    where location='Àá½Ç';
-    -- 3 Àá½Ç¿¡ »ç´Â °í°´ÀÇ ÀÌ¸§À» ¿À¸§Â÷¼øÀ¸·Î º¸ÀÌ½Ã¿À.
+    where location='ì ì‹¤';
+    -- 3 ì ì‹¤ì— ì‚¬ëŠ” ê³ ê°ì˜ ì´ë¦„ì„ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ë³´ì´ì‹œì˜¤.
     select name
     from customer_01
     order by name ASC; 
-    -- 4 °¡°İÀÌ 8000¿ø ÀÌÇÏÀÎ ¿µÈ­ÀÇ ±ØÀå¹øÈ£, »ó¿µ°ü¹øÈ£, ¿µÈ­Á¦¸ñÀ» º¸ÀÌ½Ã¿À.
+    -- 4 ê°€ê²©ì´ 8000ì› ì´í•˜ì¸ ì˜í™”ì˜ ê·¹ì¥ë²ˆí˜¸, ìƒì˜ê´€ë²ˆí˜¸, ì˜í™”ì œëª©ì„ ë³´ì´ì‹œì˜¤.
     select theater_01.theater_id,screening_room_01.room_number,screening_room_01.movie_title
     from theater_01,screening_room_01
     where theater_01.theater_id = screening_room_01.theater_id and screening_room_01.price <= 8000;
-    -- 5 ±ØÀå À§Ä¡¿Í °í°´ÀÇ ÁÖ¼Ò°¡ °°Àº °í°´À» º¸ÀÌ½Ã¿À
+    -- 5 ê·¹ì¥ ìœ„ì¹˜ì™€ ê³ ê°ì˜ ì£¼ì†Œê°€ ê°™ì€ ê³ ê°ì„ ë³´ì´ì‹œì˜¤
     select *
     from theater_01,customer_01
     where theater_01.location = customer_01.address;
     
 --------------------------------------------------------------------------------------
 
--- (2) Áı°è ÁúÀÇ
-    -- 1 ±ØÀåÀÇ ¼ö´Â ¸î °³ÀÎ°¡?
-    select count(theater_id) as "±ØÀåÀÇ ¼ö"
+-- (2) ì§‘ê³„ ì§ˆì˜
+    -- 1 ê·¹ì¥ì˜ ìˆ˜ëŠ” ëª‡ ê°œì¸ê°€?
+    select count(theater_id) as "ê·¹ì¥ì˜ ìˆ˜"
     from theater_01;
-    -- 2 »ó¿µµÇ´Â ¿µÈ­ÀÇ Æò±Õ°¡°İÀº ¾ó¸¶ÀÎ°¡?
-    select avg(price) as "¿µÈ­ Æò±Õ°¡°İ"
+    -- 2 ìƒì˜ë˜ëŠ” ì˜í™”ì˜ í‰ê· ê°€ê²©ì€ ì–¼ë§ˆì¸ê°€?
+    select avg(price) as "ì˜í™” í‰ê· ê°€ê²©"
     from screening_room_01;
-    -- 3 2020³â 9¿ù 1ÀÏ¿¡ ¿µÈ­¸¦ °ü¶÷ÇÑ °í°´ÀÇ ¼ö´Â ¾ó¸¶ÀÎ°¡?
-    select count(customer_id) as "2020³â 9¿ù 1ÀÏ¿¡ ¿µÈ­¸¦ °ü¶÷ÇÑ °í°´ ¼ö"
+    -- 3 2020ë…„ 9ì›” 1ì¼ì— ì˜í™”ë¥¼ ê´€ëŒí•œ ê³ ê°ì˜ ìˆ˜ëŠ” ì–¼ë§ˆì¸ê°€?
+    select count(customer_id) as "2020ë…„ 9ì›” 1ì¼ì— ì˜í™”ë¥¼ ê´€ëŒí•œ ê³ ê° ìˆ˜"
     from reservation_01
     where date2 = '2020-09-01';
 
 --------------------------------------------------------------------------------------
 
--- (3) ºÎ¼Ó ÁúÀÇ
-    -- 1 ´ëÇÑ ±ØÀå¿¡¼­ »ó¿µµÈ ¿µÈ­Á¦¸ñÀ» º¸ÀÌ½Ã¿À.
-    select movie_title as "´ëÇÑ±ØÀå¿¡¼­ »ó¿µÇÏ´Â ¿µÈ­"
+-- (3) ë¶€ì† ì§ˆì˜
+    -- 1 ëŒ€í•œ ê·¹ì¥ì—ì„œ ìƒì˜ëœ ì˜í™”ì œëª©ì„ ë³´ì´ì‹œì˜¤.
+    select movie_title as "ëŒ€í•œê·¹ì¥ì—ì„œ ìƒì˜í•˜ëŠ” ì˜í™”"
     from screening_room_01
     join theater_01 on screening_room_01.theater_id = theater_01.theater_id
-    where theater_name = '´ëÇÑ';
+    where theater_name = 'ëŒ€í•œ';
     
     select movie_title 
     from screening_room_01, theater_01
-    where theater_01.theater_id = screening_room_01.theater_id and theater_name = '´ëÇÑ';
+    where theater_01.theater_id = screening_room_01.theater_id and theater_name = 'ëŒ€í•œ';
     
-    -- 2 ´ëÇÑ ±ØÀå¿¡¼­ ¿µÈ­¸¦ º» °í°´ÀÇ ÀÌ¸§À» º¸ÀÌ½Ã¿À
+    -- 2 ëŒ€í•œ ê·¹ì¥ì—ì„œ ì˜í™”ë¥¼ ë³¸ ê³ ê°ì˜ ì´ë¦„ì„ ë³´ì´ì‹œì˜¤
     select name
     from customer_01,theater_01,reservation_01
-    where reservation_01.customer_id = customer_01.customer_id and theater_name = '´ëÇÑ';
-    -- 3 ´ëÇÑ ±ØÀåÀÇ ÀüÃ¼ ¼öÀÔÀ» º¸ÀÌ½Ã¿À
-    select SUM(price) as "´ëÇÑ±ØÀå ÀüÃ¼ ¼öÀÔ"
+    where reservation_01.customer_id = customer_01.customer_id and theater_name = 'ëŒ€í•œ';
+    -- 3 ëŒ€í•œ ê·¹ì¥ì˜ ì „ì²´ ìˆ˜ì…ì„ ë³´ì´ì‹œì˜¤
+    select SUM(price) as "ëŒ€í•œê·¹ì¥ ì „ì²´ ìˆ˜ì…"
     from theater_01, screening_room_01, reservation_01
     where theater_01.theater_id = screening_room_01.theater_id AND screening_room_01.theater_id = reservation_01.theater_id
-            AND screening_room_01.room_number = reservation_01.room_number and theater_name = '´ëÇÑ';
+            AND screening_room_01.room_number = reservation_01.room_number and theater_name = 'ëŒ€í•œ';
 
 --------------------------------------------------------------------------------------
 
--- (4) ±×·ì ÁúÀÇ
-    -- 1 ±ØÀåº° »ó¿µ°üÀÇ ¼ö¸¦ º¸ÀÌ½Ã¿À
-    select theater_01.theater_name as "±ØÀå ÀÌ¸§", count(*) as "»ó¿µ°üÀÇ ¼ö"
+-- (4) ê·¸ë£¹ ì§ˆì˜
+    -- 1 ê·¹ì¥ë³„ ìƒì˜ê´€ì˜ ìˆ˜ë¥¼ ë³´ì´ì‹œì˜¤
+    select theater_01.theater_name as "ê·¹ì¥ ì´ë¦„", count(*) as "ìƒì˜ê´€ì˜ ìˆ˜"
     from screening_room_01
     join theater_01 on screening_room_01.theater_id = theater_01.theater_id
     group by theater_01.theater_name;
-    -- 2 Àá½Ç¿¡ ÀÖ´Â ±ØÀåÀÇ »ó¿µ°üÀ» º¸ÀÌ½Ã¿À
+    -- 2 ì ì‹¤ì— ìˆëŠ” ê·¹ì¥ì˜ ìƒì˜ê´€ì„ ë³´ì´ì‹œì˜¤
     select *
     from theater_01
     join screening_room_01 on theater_01.theater_id = screening_room_01.theater_id
-    where location = 'Àá½Ç';
+    where location = 'ì ì‹¤';
 
     SELECT * 
     FROM screening_room_01, theater_01 
-    WHERE theater_01.theater_id=screening_room_01.theater_id AND location LIKE 'Àá½Ç';
+    WHERE theater_01.theater_id=screening_room_01.theater_id AND location LIKE 'ì ì‹¤';
     
-    -- 3 2020³â 9¿ù 1ÀÏ¿¡ ±ØÀåº° Æò±Õ °ü¶÷ °í°´ÀÇ ¼ö¸¦ º¸ÀÌ½Ã¿À.
-    SELECT theater_01.theater_name as "±ØÀå ÀÌ¸§", COUNT(*) as "°í°´ ¼ö"
+    -- 3 2020ë…„ 9ì›” 1ì¼ì— ê·¹ì¥ë³„ í‰ê·  ê´€ëŒ ê³ ê°ì˜ ìˆ˜ë¥¼ ë³´ì´ì‹œì˜¤.
+    SELECT theater_01.theater_name as "ê·¹ì¥ ì´ë¦„", COUNT(*) as "ê³ ê° ìˆ˜"
     FROM reservation_01 
     join theater_01 on reservation_01.theater_id = theater_01.theater_id
     WHERE date2 = '2020-09-01'
     GROUP BY theater_01.theater_name;
     
-    -- 4 2020³â 9¿ù 1ÀÏ¿¡ °¡Àå ¸¹Àº °í°´ÀÌ °ü¶÷ÇÑ ¿µÈ­¸¦ º¸ÀÌ½Ã¿À.
+    -- 4 2020ë…„ 9ì›” 1ì¼ì— ê°€ì¥ ë§ì€ ê³ ê°ì´ ê´€ëŒí•œ ì˜í™”ë¥¼ ë³´ì´ì‹œì˜¤.
     SELECT *
     from screening_room_01
     join reservation_01 on screening_room_01.theater_id = reservation_01.theater_id
