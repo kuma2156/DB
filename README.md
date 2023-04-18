@@ -19,5 +19,5 @@ Database <br>
 
 <br><br>
 
-23 04 18<br
+23 04 18<br>
 ER다이어그램, IR다이어그램 ex13 문제 테이블 생성<br>
