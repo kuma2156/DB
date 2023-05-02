@@ -21,3 +21,8 @@ Database <br>
 
 23 04 18<br>
 ER다이어그램, IR다이어그램 ex13 문제 테이블 생성<br>
+
+<br><br>
+23 05 02 <br>
+c7_code<br>
+이상현상과 정규화<br>
