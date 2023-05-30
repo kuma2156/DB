@@ -30,3 +30,9 @@ c7_code<br>
 <br><br>
 <h1>23 05 16 </h1><br>
 동시성 제어 (갱실 손실 문제 , lock)
+
+<br><br>
+<h1>23 05 30 </h1><br>
+SQL 고급 함수들 예제를 통해 공부<br>
+NULL에 대한 연산, rownum() 실행순위<br>
+sub query 부속질의 <br>
