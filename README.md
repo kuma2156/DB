@@ -36,3 +36,8 @@ c7_code<br>
 SQL 고급 함수들 예제를 통해 공부<br>
 NULL에 대한 연산, rownum() 실행순위<br>
 sub query 부속질의 (nested query 중첩질의 정리)<br>
+
+<br><br>
+<h1>23 06 05 </h1><br>
+뷰 생성 ,수정 삭제<br>
+인덱스 오라클 B-Tree 구조 
