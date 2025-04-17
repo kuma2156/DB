@@ -4,12 +4,19 @@ Oracle 중심으로 데이터베이스 개념, SQL, 정규화, 트랜잭션, 고
 
 ---
 
-## 💻 학습자  
-
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/61049fd5-5e06-4b17-bb51-d925ea3e68dc" width="250"><br>
-  <b>김명규</b><br>
-  <a href="https://github.com/kuma2156">https://github.com/kuma2156</a>
+<div align="left">
+    <h1>💻 학습자</h1>
+    <table>
+        <tr>
+            <td align="center"><img src="https://github.com/user-attachments/assets/61049fd5-5e06-4b17-bb51-d925ea3e68dc" width="250"></td>
+        </tr>
+        <tr>
+            <td align="center"><b>김명규</b></td>
+        </tr>
+        <tr>
+            <td align="center"><b>https://github.com/kuma2156</b></td>
+        </tr>
+    </table>
 </div>
 
 ---
